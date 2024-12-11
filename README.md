@@ -148,6 +148,7 @@ my-app/
 
 ## Notes
 
+- This project currently does not include a dedicated UI/UX design. The interface and user flow are minimal and primarily intended for demonstration and testing purposes. Future updates may include a more polished and user-friendly design.
 - This setup is for demonstration and interview purposes.  
 - Authentication is mocked: any username with `password` as password logs you in. Only the username `admin` gets admin role.  
 - Data is stored in memory for tasks (lost on server restart). For persistence, integrate a real database.
