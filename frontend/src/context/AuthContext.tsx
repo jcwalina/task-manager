@@ -7,19 +7,22 @@ interface AuthContextProps {
     login: (username: string, password: string) => Promise<void>;
     logout: () => void;
     isAdmin: boolean;
+    loadingAuth: boolean;
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [loadingAuth, setLoadingAuth] = useState(true);
 
-    // Beim Laden des Contexts User aus localStorage laden
+
     useEffect(() => {
         const savedUser = localStorage.getItem('user');
         if (savedUser) {
             setUser(JSON.parse(savedUser));
         }
+        setLoadingAuth(false);
     }, []);
 
     const login = async (username: string, password: string) => {
@@ -27,7 +30,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             const role = username === 'admin' ? 'admin' : 'user';
             const newUser: User = { username, role };
             setUser(newUser);
-            // User in localStorage speichern
             localStorage.setItem('user', JSON.stringify(newUser));
         } else {
             throw new Error('Invalid credentials');
@@ -40,7 +42,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, isAdmin: user?.role === 'admin' }}>
+        <AuthContext.Provider value={{ user, login, logout, isAdmin: user?.role === 'admin', loadingAuth }}>
             {children}
         </AuthContext.Provider>
     );
