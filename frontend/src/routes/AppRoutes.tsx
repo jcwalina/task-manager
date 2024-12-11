@@ -14,6 +14,7 @@ const AppRoutes: React.FC = () => {
             {user ? (
                 <MainLayout>
                     <Routes>
+                        <Route path="/login" element={<Navigate to="/" />} />
                         <Route path="/" element={<Dashboard />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
