@@ -13,7 +13,9 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <Box sx={{ display: 'flex' }}>
             <Navbar handleDrawerToggle={handleDrawerToggle} drawerOpen={mobileOpen} />
             <Sidebar drawerWidth={drawerWidth} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ flexGrow: 1, p: 3 ,
+                ml: { sm: `${drawerWidth}px` }
+            }}>
                 <Toolbar />
                 {children}
             </Box>

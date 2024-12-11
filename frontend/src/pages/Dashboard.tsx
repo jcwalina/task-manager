@@ -43,6 +43,8 @@ const Dashboard: React.FC = () => {
         setTasks((prev) => prev.filter((t) => t.id !== id));
     };
 
+    console.log("Dashboard render", user, tasks)
+
     return (
         <Box>
             <Typography variant="h4" gutterBottom>Dashboard</Typography>

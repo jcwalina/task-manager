@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Paper, Box } from '@mui/material';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const { login } = useAuth();
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -11,6 +13,7 @@ const Login: React.FC = () => {
     const handleSubmit = async () => {
         try {
             await login(username, password);
+            navigate("/");
         } catch (err: any) {
             setError(err.message);
         }
